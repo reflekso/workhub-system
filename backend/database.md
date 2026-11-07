@@ -46,7 +46,8 @@ CREATE TABLE proposals (
     proposal_message VARCHAR(500),
     proposal_status proposal_status NOT NULL DEFAULT 'pending',
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT uq_proposals_job_freelancer UNIQUE (job_id, freelancer_id)
 );
 ```
 
