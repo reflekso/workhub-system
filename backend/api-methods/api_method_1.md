@@ -16,9 +16,8 @@ Authorization: Bearer token
 
 ## Request-Body
 
-```
+```json
 {
-  "freelancer_id": 2,
   "proposal_message": "Какой-то сопроводительный текст..."
 }
 ```
@@ -27,96 +26,44 @@ Authorization: Bearer token
 
 ### 201 Created
 
-```
+```json
 {
   "proposal_id": 3
 }
 ```
 
-### 400 Bad Request
+## Коды ошибок
 
-```
-{
-  "status": 400,
-  "title": "Bad Request",
-  "message": "Ошибка запроса."
-}
-```
+Все ошибки возвращаются в едином формате.
 
-### 401 Unauthorized
-
-
-```
+```json
 {
   "status": 401,
-  "title": "Unauthorized",
+  "code": "UNAUTHORIZED",
+  "title": "Forbidden",
   "message": "Вы не авторизованы в системе."
 }
 ```
 
-### 403 Forbidden
-
-```
-{
-  "status": 403,
-  "title": "Forbidden",
-  "message": "У вас недостаточно прав для выполнения данного действия."
-}
-```
-### 404 Not Found
-
-```
-{
-  "status": 404,
-  "title": "Not Found",
-  "message": "Заказ не найден."
-}
-```
-### 409 Conflict
-
-```
-{
-  "status": 409,
-  "title": "Conflict",
-  "message": "Вы уже откликнулись на этот заказ."
-}
-```
-### 422 Unprocessable Content
-
-```
-{
-  "status": 422,
-  "title": "Unprocessable Content",
-  "message": "Неверная длина сопроводительного текста. Максимально возможная длина 500 символов."
-}
-```
-### 500 Internal Server Error
-
-```
-{
-  "status": 500,
-  "title": "Internal Server Error",
-  "message": "Внутренняя ошибка сервера."
-}
-```
-### 503 Service Unavailable
-
-```
-{
-  "status": 503,
-  "title": "Service Unavailable",
-  "message": "Сервис временно недоступен."
-}
-```
+| HTTP-код | `code` | Описание | `message` |
+| --- | --- | --- | --- |
+| 400 Bad Request | `ERROR_VALIDATION` | Ошибка валидации запроса | `"Ошибка в теле запроса."` |
+| 401 Unauthorized | `UNAUTHORIZED` | Нет токена или токен не валиден | `"Вы не авторизованы в системе."` |
+| 403 Forbidden | `PROPOSAL_CREATE_FORBIDDEN` | Создание отклика на заказ доступно только пользователям с ролью `freelancer` | `"Действие доступно только Исполнителям."` |
+| 404 Not Found | `JOB_NOT_FOUND` | Заказ с таким ID не найден | `"Заказ не найден."` |
+| 409 Conflict | `PROPOSAL_CREATE_CONFLICT_DUPLICATE` | Пользователь не может создавать отклик на один заказ дважды | `"Вы уже откликнулись на этот заказ."` |
+| 409 Conflict | `PROPOSAL_CREATE_CONFLICT_STATUS` | Пользователь может создавать отклик на заказ только если он в статусе `published` | `"Сейчас нельзя откликнуться на этот заказ."` |
+| 422 Unprocessable Content | `PROPOSAL_MESSAGE_TOO_LONG` | Длина сопроводительного текста не должна превышать 500 символов | `"Неверная длина сопроводительного текста. Максимально возможная длина 500 символов."` |
+| 500 Internal Server Error | `INTERNAL_ERROR` | Внутренняя ошибка сервера | `"Внутренняя ошибка сервера."` |
 
 ## Маппинг полей
 
 | Название поля | Тип | Описание | Соответствующий атрибут в БД |
 |---|---|---|---|
-| freelancer_id | integer | Идентификатор пользователя, вызывающего метод | proposals.freelancer_id |
 | proposal_message | string | Сопроводительный текст к отклику | proposals.proposal_message |
 | proposal_id | integer | Идентификатор отклика | proposals.proposal_id |
 | status | integer | Код состояния HTTP | - |
+| code | string | Внутренний код ошибки | - |
 | title | string | Текстовый код состояния HTTP  | - |
 | message | string | Поясняющее сообщение ответа | - |
 
