@@ -29,7 +29,7 @@
 
 ## SQL-скрипт создания таблицы
 
-```
+```sql
 -- Создание типа данных proposal_status
 CREATE TYPE proposal_status AS ENUM (
     'pending',
@@ -44,11 +44,16 @@ CREATE TABLE proposals (
     job_id INT NOT NULL REFERENCES jobs(job_id),
     freelancer_id INT REFERENCES users(user_id),
     proposal_message VARCHAR(500),
-    proposal_status proposal_status NOT NULL DEFAULT 'pending',
+    proposal_status NOT NULL DEFAULT 'pending',
     created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT uq_proposals_job_freelancer UNIQUE (job_id, freelancer_id)
 );
+
+-- Создание уникального индекса для невозможности выбора более одного исполнителя заказа
+CREATE UNIQUE INDEX uq_idx_single_accepted_status
+ON proposals (job_id)
+WHERE proposal_status = 'accepted';
 ```
 
 ## ER-Diagram
