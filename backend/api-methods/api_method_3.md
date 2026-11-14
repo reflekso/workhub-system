@@ -17,103 +17,47 @@ Authorization: Bearer token
 
 ## Request-Body
 
-```
+```json
 {
   "proposal_status": "accepted"
 }
 ```
 
-## Responses
+## Response
 
 ### 200 OK
 
-```
+```json
 {
   "proposal_id": 2,
   "freelancer_id": 12,
-  "freelancer_name": "Иванов Иван",
-  "status": 200,
-  "title": "OK",
-  "message": "Исполнитель заказа успешно выбран."
-  
+  "freelancer_name": "Иванов Иван" 
 }
 ```
 
-### 400 Bad Request
+## Коды ошибок
 
-```
-{
-  "status": 400,
-  "title": "Bad Request",
-  "message": "Ошибка запроса."
-}
-```
-
-### 401 Unauthorized
-
-
-```
+Все ошибки возвращаются в едином формате.
+```json
 {
   "status": 401,
-  "title": "Unauthorized",
+  "code": "UNAUTHORIZED",
+  "title": "Forbidden",
   "message": "Вы не авторизованы в системе."
 }
 ```
-
-### 403 Forbidden
-
-```
-{
-  "status": 403,
-  "title": "Forbidden",
-  "message": "У вас недостаточно прав для выполнения данного действия."
-}
-```
-### 404 Not Found
-
-```
-{
-  "status": 404,
-  "title": "Not Found",
-  "message": "Заказ или отклик не найден."
-}
-```
-### 409 Conflict
-
-```
-{
-  "status": 409,
-  "title": "Conflict",
-  "message": "Исполнитель заказа уже выбран."
-}
-```
-### 422 Unprocessable Content
-
-```
-{
-  "status": 422,
-  "title": "Unprocessable Content",
-  "message": "Неверно переданный статус. Можно передавать только 'accepted'."
-}
-```
-### 500 Internal Server Error
-
-```
-{
-  "status": 500,
-  "title": "Internal Server Error",
-  "message": "Внутренняя ошибка сервера."
-}
-```
-### 503 Service Unavailable
-
-```
-{
-  "status": 503,
-  "title": "Service Unavailable",
-  "message": "Сервис временно недоступен."
-}
-```
+| HTTP-код | `code` | Описание | `message` |
+| --- | --- | --- | --- |
+| 400 | `CHOOSE_FREELANCER_VALIDATION_ERROR` | Ошибка валидации, запрос должен содержать поле `proposal_status` | `Ошибка запроса.` |
+| 401 | `UNAUTHORIZED` | Нет токена или токен не валиден | `"Вы не авторизованы в системе."` |
+| 403 | `CHOOSE_FREELANCER_FORBIDDEN_ROLE` | Выбор Исполнителя заказа доступен только пользователям с ролью `client` | `"Только Заказчики могут выбирать Исполнеителя."` |
+| 403 | `CHOOSE_FREELANCER_FORBIDDEN_OWNER` | Выбор Исполнителя заказа доступен только создателю заказа. | `"Вы не создатель этого заказа."` |
+| 404 | `JOB_NOT_FOUND` | Заказ с таким ID не найден | `"Заказ не найден."` |
+| 404 | `PROPOSAL_NOT_FOUND` | Отклик с таким ID не найден | `"Отклик не найден."` |
+| 409 | `CHOOSE_FREELANCER_CONFLICT_JOB` | Пользователь может выбирать Исполнителя заказа только, если заказ в статусе `published`  | `"Вы не можете выбрать Исполнителя на этот заказ."` |
+| 409 | `CHOOSE_FREELANCER_CONFLICT_PROPOSAL` | Пользователь может выбрать Исполнителя только если его отклик в статусе `pending`  | `"Вы не можете выбрать этого Исполнителя."` |
+| 422 | `CHOOSE_FREELANCER_UNPROCESSABLE` | В теле запроса поле `proposal_status` может содержать только `accepted`. | `"Неверно переданный статус отклика. Статус может быть только 'accepted'."` |
+| 500 | `INTERNAL_ERROR` | Внутренняя ошибка сервера | `"Внутренняя ошибка сервера."` |
 
 ## Маппинг полей
 
@@ -124,6 +68,7 @@ Authorization: Bearer token
 | freelancer_id | integer | Идентификатор Исполнителя, оставившего отклик | proposals.freelancer_id |
 | freelancer_name | integer | Имя и фамилия Исполнителя, оставившего отклик | users.firstname, users.lastname |
 | status | integer | Код состояния HTTP | - |
+| code | string | Внутренний код ошибки | - |
 | title | string | Текстовый код состояния HTTP  | - |
 | message | string | Поясняющее сообщение ответа | - |
 

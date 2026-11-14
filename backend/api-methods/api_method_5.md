@@ -17,99 +17,35 @@ Authorization: Bearer token
 
 ## Request-Body
 
-```
+```json
 {
   "proposal_status": "cancelled"
 }
 ```
 
-## Responses
+## Response
 
 ### 200 OK
 
-```
+```json
 {
   "proposal_id": 4,
   "job_id": 7
 }
 ```
 
-### 400 Bad Request
 
-```
-{
-  "status": 400,
-  "title": "Bad Request",
-  "message": "Ошибка запроса."
-}
-```
+| HTTP-код | `code` | Описание | `message` |
+| --- | --- | --- | --- |
+| 400 | `CLOSE_PROPOSAL_VALIDATION_ERROR` | Ошибка валидации, запрос должен содержать поле `proposal_status` | `Ошибка запроса.` |
+| 401 | `UNAUTHORIZED` | Нет токена или токен не валиден | `"Вы не авторизованы в системе."` |
+| 403 | `CLOSE_PROPOSAL_FORBIDDEN_ROLE` | Отмена отклика на заказ доступна только пользователям с ролью `freelancer` | `"Только Исполнители могут отменять отклик на заказ."` |
+| 403 | `CLOSE_PROPOSAL_FORBIDDEN_OWNER` | Отмена отклика доступна только Исполнителю, который оставил этот отклик | `"У вас нет права отменять этот отклик."` |
+| 404 | `PROPOSAL_NOT_FOUND` | Отклик с таким ID не найден | `"Отклик не найден."` |
+| 409 | `CLOSE_PROPOSAL_CONFLICT` | Пользователь может отменять отклик только, если отклик в статусе `pending`  | `"Вы уже не можете отменить отклик на этот заказ."` |
+| 422 | `CLOSE_PROPOSAL_UNPROCESSABLE` | В теле запроса поле `proposal_status` может содержать только `cancelled`. | `"Неверно переданный статус отклика. Статус может быть только 'cancelled'."` |
+| 500 | `INTERNAL_ERROR` | Внутренняя ошибка сервера | `"Внутренняя ошибка сервера."` |
 
-### 401 Unauthorized
-
-```
-{
-  "status": 401,
-  "title": "Unauthorized",
-  "message": "Вы не авторизованы в системе."
-}
-```
-
-### 403 Forbidden
-
-```
-{
-  "status": 403,
-  "title": "Forbidden",
-  "message": "У вас недостаточно прав для выполнения данного действия."
-}
-```
-### 404 Not Found
-
-```
-{
-  "status": 404,
-  "title": "Not Found",
-  "message": "Отклик не найден."
-}
-```
-### 409 Conflict
-
-```
-{
-  "status": 409,
-  "title": "Conflict",
-  "message": "Исполнитель уже закрыл заказ или заказ передан в работу."
-}
-```
-### 422 Unprocessable Content
-
-```
-{
-  "status": 422,
-  "title": "Unprocessable Content",
-  "message": "Неверно переданный статус. Можно передавать только 'cancelled'."
-}
-```
-
-### 500 Internal Server Error
-
-```
-{
-  "status": 500,
-  "title": "Internal Server Error",
-  "message": "Внутренняя ошибка сервера."
-}
-```
-
-### 503 Service Unavailable
-
-```
-{
-  "status": 503,
-  "title": "Service Unavailable",
-  "message": "Сервис временно недоступен."
-}
-```
 
 ## Маппинг полей
 
@@ -120,5 +56,6 @@ Authorization: Bearer token
 | job_id | integer | Идентификатор заказа | proposals.job_id |
 | proposal_status | string | Статус отклика | proposals.proposal_status |
 | status | integer | Код состояния HTTP | - |
+| code | string | Внутренний код ошибки | - |
 | title | string | Текстовый код состояния HTTP  | - |
 | message | string | Поясняющее сообщение ответа | - |

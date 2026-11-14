@@ -47,7 +47,7 @@ Authorization: Bearer token
 
 | HTTP-код | `code` | Описание | `message` |
 | --- | --- | --- | --- |
-| 400 Bad Request | `ERROR_VALIDATION` | Ошибка валидации запроса | `"Ошибка в теле запроса."` |
+| 400 Bad Request | `PROPOSAL_CREATE_ERROR_VALIDATION` | Ошибка валидации запроса. Должно обязательно содержать поле `proposal_message`. Значение поля может быть пустым. | `"Ошибка в теле запроса."` |
 | 401 Unauthorized | `UNAUTHORIZED` | Нет токена или токен не валиден | `"Вы не авторизованы в системе."` |
 | 403 Forbidden | `PROPOSAL_CREATE_FORBIDDEN` | Создание отклика на заказ доступно только пользователям с ролью `freelancer` | `"Действие доступно только Исполнителям."` |
 | 404 Not Found | `JOB_NOT_FOUND` | Заказ с таким ID не найден | `"Заказ не найден."` |
