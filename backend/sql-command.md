@@ -190,7 +190,32 @@ WHERE freelancer_id = 'ID Исполнителя, отправившего за�
 
 ---
 
-## BE-5 В разработке... 
+## BE-5
 
+
+### Проверка существования отклика и получение ID создателя отклика 
+
+```sql
+SELECT freelancer_id, proposal_status
+FROM proposals
+WHERE proposal_id = 'ID отклика в запросе'
+```
+
+**Responses:**
+
+1. Пустой ответ, если отклик не создан.
+2. `freelancer_id` и `proposal_status`, если отклик создан.
+
+### Отмена отклика
+
+```sql
+UPDATE proposals
+SET proposal_status = 'cancelled'
+WHERE proposal_id = 'ID отклика в запросе'
+```
+
+**Responses:**
+
+1. Успешное изменение статуса отклика.
 
 
