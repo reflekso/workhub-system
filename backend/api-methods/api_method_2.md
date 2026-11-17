@@ -32,6 +32,7 @@ Authorization: Bearer token
       "freelancer_id": 20,
       "freelancer_name": "Иванов Иван", 
       "proposal_message": "Какой-то сопроводительный текст...",
+      "proposal_status": "pending",
       "created_at": "2026-01-01T05:40:04Z"
     },
 
@@ -40,6 +41,7 @@ Authorization: Bearer token
       "freelancer_id": 32,
       "freelancer_name": "Сергеев Сергей", 
       "proposal_message": "Другой какой-то сопроводительный текст",
+      "proposal_status": "cancelled",
       "created_at": "2026-01-01T05:40:04Z"
     }
   ],
@@ -84,6 +86,7 @@ Authorization: Bearer token
 | freelancer_id | integer | Идентификатор Исполнителя, оставившего отклик | proposals.freelancer_id |
 | freelancer_name | integer | Имя и фамилия Исполнителя, оставившего отклик | users.firstname, users.lastname |
 | proposal_message | string | Сопроводительный текст Исполнителя к отклику | proposals.proposal_message |
+| proposal_status | string | Статус отклика | proposals.proposal_status |
 | created_at | string | Дата и время отклика на заказ | proposals.created_at |
 | pagination | array | Массив параметров пагинации | - |
 | current_page | integer | Номер текущей страницы | - |

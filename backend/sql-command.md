@@ -69,7 +69,7 @@ WHERE job_id = 'ID заказа в запросе'
 ### Получение списка откликов на заказ
 
 ```sql
-SELECT proposals.proposal_id, proposals.freelancer_id, users.firstname, users.lastname, proposals.proposal_message, proposals.created_at
+SELECT proposals.proposal_id, proposals.freelancer_id, users.firstname, users.lastname, proposals.proposal_message, proposals.proposal_status, proposals.created_at
 FROM proposals
 INNER JOIN users ON users.user_id = proposals.freelancer_id
 WHERE job_id = 'ID заказа в запросе'
