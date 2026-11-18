@@ -1,3 +1,5 @@
+[Главная](/README.md) / [Техническое задание](/requirements-specification.md) / [Backend: API-методы](/backend/api.md)
+
 # Задание на Backend : Создание API-методов
 
 ## Цель

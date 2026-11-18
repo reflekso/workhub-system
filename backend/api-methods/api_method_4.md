@@ -1,3 +1,5 @@
+[Главная](/README.md) / [Техническое задание](/requirements-specification.md) / [Backend: API-методы](/backend/api.md) / [GET /api/v1/users/me/proposals](/backend/api-methods/api_method_4.md)
+
 # GET /api/v1/users/me/proposals
 
 Content-type: application/json 

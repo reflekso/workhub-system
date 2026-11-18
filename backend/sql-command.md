@@ -1,3 +1,5 @@
+[Главная](/README.md) / [Техническое задание](/requirements-specification.md) / [Backend: Бизнес-логика сервера](/backend/server-logic.md) / [SQL-запросы](/backend/sql-command.md)
+
 # SQL-запросы, используемые при обращении к БД
 
 ## Описание

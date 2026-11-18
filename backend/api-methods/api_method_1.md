@@ -1,3 +1,5 @@
+[Главная](/README.md) / [Техническое задание](/requirements-specification.md) / [Backend: API-методы](/backend/api.md) / [POST /api/v1/jobs/{job_id}/proposals](/backend/api-methods/api_method_1.md)
+
 # POST /api/v1/jobs/{job_id}/proposals
 
 Content-type: application/json 

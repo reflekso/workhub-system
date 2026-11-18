@@ -1,3 +1,5 @@
+[Главная](/README.md) / [Техническое задание](/requirements-specification.md) / [Backend: API-методы](/backend/api.md) / [PATCH /api/v1/users/me/proposals/{proposal_id}](/backend/api-methods/api_method_5.md)
+
 # PATCH /api/v1/users/me/proposals/{proposal_id}
 
 Content-type: application/json 

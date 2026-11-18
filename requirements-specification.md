@@ -1,3 +1,5 @@
+[Главная](/README.md) / [Техническое задание](/requirements-specification.md)
+
 # Техническое задание
 
 ## Цель

@@ -1,3 +1,5 @@
+[Главная](/README.md) / [Техническое задание](/requirements-specification.md) / [Frontend: Взаимодействие с API](/frontend/api-integration.md)
+
 # Задание на Frontend : Взаимодействие API с интерфейсом
 
 ## Цель

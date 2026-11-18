@@ -1,3 +1,5 @@
+[Главная](/README.md) / [Техническое задание](/requirements-specification.md) / [Backend: Таблицы и поля](/backend/database.md)
+
 # Задание на Backend : Создание таблиц и полей
 
 ## Цель
