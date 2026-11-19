@@ -46,11 +46,11 @@
 workhub-system/
 ├── README.md                          # Описание проекта и навигация по документации
 ├── business-task.md                   # Бизнес-контекст и описание задачи на доработку
-├── requirements-specification.md      # Техническое задание (функциональные и нефункциональные требования)
+├── requirements-specification.md      # Техническое задание
 ├── backend/
 │   ├── api.md                         # Обзор методов REST API
 │   ├── database.md                    # Проектирование модели базы данных
-│   ├── server-logic.md                # Описание серверной бизнес-логики
+│   ├── server-logic.md                # Описание серверной бизнес-логики (функциональные и нефункциональные требования)
 │   ├── sql-command.md                 # SQL-команды и запросы к БД
 │   └── api-methods/                   # Спецификации отдельных методов REST API
 │       ├── api_method_1.md
@@ -59,7 +59,7 @@ workhub-system/
 │       ├── api_method_4.md
 │       └── api_method_5.md
 ├── frontend/
-│   ├── api-integration.md             # Сценарии интеграции клиентской части с REST API
+│   ├── api-integration.md             # Сценарии интеграции клиентской части с REST API (функциональные и нефункциональные требования)
 │   └── ui-development.md              # Требования к разработке пользовательского интерфейса
 └── diagrams/
     ├── erd.png                        # ER-диаграмма базы данных
